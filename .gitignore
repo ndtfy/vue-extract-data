@@ -28,3 +28,13 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# own rules
+.gitignore
+.vscode
+_res
+*.ppr
+*cmd.lnk
+node_http_server*
+package-lock.json
+favicon.ico
