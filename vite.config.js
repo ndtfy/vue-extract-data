@@ -15,5 +15,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: '/vue-extract-data/',
+  server: {
+//  host: true,
+//  port: 8000,
+  },
+  base: '/vue-extract-data/'
 })

@@ -1,15 +1,16 @@
-<script setup lang="ts">
+<script setup>
 
 import { ref, computed } from 'vue'
 
 import WidgetPanels from '@/components/widget-panels.vue'
+import WidgetOutput from '@/components/widget-output.vue'
 
 const input = ref('')
 
 const output = computed(() => {
   if ( !input.value ) {
     prompt.value = 'No data'
-    return ''
+    return []
   }
 
   let res = input.value
@@ -56,29 +57,32 @@ const output = computed(() => {
   })
 
   let resList = res.split('\n')
-  mode.value.forEach( item => {
-    switch ( item ) {
-      case "empty":
-        resList = resList.filter(s => s);
-        break;
-    }
-  })
 
   // Order-sensitive parameters
+  if ( mode.value.includes("quotes") )
+    resList = resList.map(x => x.replaceAll("'", ''))
+
+  if ( mode.value.includes("dquotes") )
+    resList = resList.map(x => x.replaceAll('"', ''))
+
   if ( mode.value.includes("trim") )
     resList = resList.map(s => s.trim())
+
+  if ( mode.value.includes("empty") )
+    resList = resList.filter(s => s)
 
   if ( mode.value.includes("duplicates") )
     resList = [...new Set(resList)]
 
-  res = resList.join('\n')
+  if ( mode.value.includes("sort") )
+    resList = resList.sort()
 
-  return res
+  return resList
 })
 
 const prompt = ref('')
 
-const mode = ref([])
+const mode = ref(["empty", "duplicates", "trim"])
 
 const modeList = ref([
   ['tab',         'Tab'],
@@ -90,10 +94,13 @@ const modeList = ref([
   ['subsequence', 'Sequence'],
   ['regexp',      'Regular expression'],
   ['-', ''],
+  ['quotes',      'Remove single quotes'],
+  ['dquotes',     'Remove double quotes'],
   ['trim',        'Remove leading and trailing whitespace'],
-//['consecutive', 'Treat consecutive delimiters as one'],
   ['empty',       'Remove empty lines'],
   ['duplicates',  'Remove duplicates'],
+  ['-', ''],
+  ['sort',        'Sort'],
 ])
 
 const symbols = ref('')
@@ -106,7 +113,7 @@ function clear() {
 }
 
 function copy() {
-  navigator.clipboard.writeText( output.value );
+  navigator.clipboard.writeText( output.value.join('\n') );
 }
 
 </script>
@@ -114,16 +121,18 @@ function copy() {
 <template>
   <WidgetPanels>
     <template #pane1>
-      <div class="pane">
+      <div class="panediv">
         <textarea v-model="input" class="input-box" placeholder="Raw data" required></textarea>
         <span></span>
         <button class="clear-button" type="button" @click="clear"></button>
       </div>
     </template>
     <template #pane2>
-      <div class="pane">
-        <textarea v-model="output" :placeholder="prompt" readonly></textarea>
-        <button type="button" @click="copy">Copy</button>
+      <div class="panediv">
+        <WidgetOutput :output="output" :prompt="prompt" />
+        <div v-if="output.length">
+          <button type="button" @click="copy">Copy</button>
+        </div>
       </div>
     </template>
   </WidgetPanels>
@@ -159,8 +168,8 @@ function copy() {
   <hr />
 
   <button type="button" @click="input=`    String1\t1\t2\t\t4\t
-    String2;1;2;;4;
-    String3,1,2,,4,
+    String2;1;\u00222\u0022;;\u00224\u0022;
+    String3,1,\u00272\u0027,,\u00274\u0027,
     String4 1 2  4
     String5\u16801\u200a2\u2028\u205f4\ufeff
     String6-1-2--4-
@@ -174,20 +183,19 @@ function copy() {
 </template>
 
 <style scoped>
-  .pane {
+  .panediv {
     position: relative;
-    height: 100%;
+    height: 95%;
     display: flex;
     flex-direction: column;
   }
   textarea {
     flex-grow: 1;
     display: block;
-    resize: vertical;
+    resize: none;
     padding: 10px;
     width: 100%;
     min-height: 200px;
-    resize: none;
     border: 0px;
     border: 1px solid #ccc;
     outline: 0;
