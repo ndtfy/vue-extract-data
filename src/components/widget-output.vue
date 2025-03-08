@@ -10,9 +10,9 @@ const props = defineProps({
     type: String,
     default: ''
   }
-})
+});
 
-const { output, prompt } = toRefs(props)
+const { output, prompt } = toRefs(props);
 
 </script>
 

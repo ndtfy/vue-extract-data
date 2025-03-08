@@ -11,9 +11,9 @@ const props = defineProps({
     type: String,
     default: '20vh'
   }
-})
+});
 
-const { width, height } = toRefs(props)
+const { width, height } = toRefs(props);
 
 </script>
 

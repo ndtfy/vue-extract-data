@@ -5,15 +5,15 @@ import { ref, computed } from 'vue'
 import WidgetPanels from '@/components/widget-panels.vue'
 import WidgetOutput from '@/components/widget-output.vue'
 
-const input = ref('')
+const input = ref('');
 
 const output = computed(() => {
   if ( !input.value ) {
-    prompt.value = 'No data'
-    return []
+    prompt.value = 'No data';
+    return [];
   }
 
-  let res = input.value
+  let res = input.value;
 
   mode.value.forEach( item => {
     switch ( item ) {
@@ -56,33 +56,33 @@ const output = computed(() => {
     }
   })
 
-  let resList = res.split('\n')
+  let resList = res.split('\n');
 
   // Order-sensitive parameters
   if ( mode.value.includes("quotes") )
-    resList = resList.map(x => x.replaceAll("'", ''))
+    resList = resList.map(x => x.replaceAll("'", ''));
 
   if ( mode.value.includes("dquotes") )
-    resList = resList.map(x => x.replaceAll('"', ''))
+    resList = resList.map(x => x.replaceAll('"', ''));
 
   if ( mode.value.includes("trim") )
-    resList = resList.map(s => s.trim())
+    resList = resList.map(s => s.trim());
 
   if ( mode.value.includes("empty") )
-    resList = resList.filter(s => s)
+    resList = resList.filter(s => s);
 
   if ( mode.value.includes("duplicates") )
-    resList = [...new Set(resList)]
+    resList = [...new Set(resList)];
 
   if ( mode.value.includes("sort") )
-    resList = resList.sort()
+    resList = resList.sort();
 
-  return resList
+  return resList;
 })
 
-const prompt = ref('')
+const prompt = ref('');
 
-const mode = ref(["empty", "duplicates", "trim"])
+const mode = ref(['empty', 'duplicates', 'trim']);
 
 const modeList = ref([
   ['tab',         'Tab'],
@@ -101,11 +101,11 @@ const modeList = ref([
   ['duplicates',  'Remove duplicates'],
   ['-', ''],
   ['sort',        'Sort'],
-])
+]);
 
-const symbols = ref('')
-const subsequence = ref('')
-const regexp = ref('')
+const symbols = ref('');
+const subsequence = ref('');
+const regexp = ref('');
 
 function clear() {
   input.value = '';
@@ -217,7 +217,7 @@ function copy() {
     padding: 20px 0px 0px 0px;
   }
 
-  textarea1 + span:before {
+  textarea1 + span::before {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -225,11 +225,11 @@ function copy() {
   textarea1:invalid {
     border: 1px solid yellow;
   }
-  textarea1:invalid + span:before {
+  textarea1:invalid + span::before {
     content: "✖";
     color: red;
   }
-  textarea1:valid + span:before {
+  textarea1:valid + span::before {
     content: "✓";
     color: green;
   }
@@ -249,7 +249,7 @@ function copy() {
     outline: 0;
     cursor: pointer;
   }
-  .clear-button:after {
+  .clear-button::after {
     position: absolute;
     top: 0px;
     right: 0px;

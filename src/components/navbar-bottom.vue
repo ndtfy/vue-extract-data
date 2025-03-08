@@ -14,6 +14,6 @@
     width: 100%;
     z-index: 100;
     padding: 4px 18px;
-    background-color: #efefff;
+    background-color: var(--navbar-bottom-background-color);
   }
 </style>

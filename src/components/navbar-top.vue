@@ -1,35 +1,49 @@
 <script setup>
+
+import { ref } from 'vue'
+
+import WidgetSwitchTheme from '@/components/widget-switch-theme.vue'
+
+const switchTheme = ref();
+
 </script>
 
 <template>
   <header>
     <ul>
       <li><a href=".">Home</a></li>
-      <!--li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Theme</a>
         <div class="dropdown-content">
-          <a href="#link1">Link 1</a>
-          <a href="#link2">Link 2</a>
-          <a href="#link3">Link 3</a>
+          <a href="#" @click.prevent="switchTheme.toggleDarkMode(false)">Light</a>
+          <a href="#" @click.prevent="switchTheme.toggleDarkMode(true)">Dark</a>
+          <a href="#" @click.prevent="switchTheme.toggle()">Toggle</a>
         </div>
-      </li-->
+      </li>
     </ul>
+    <WidgetSwitchTheme ref="switchTheme" />
   </header>
 </template>
 
 <style scoped>
   header {
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    align-items: center;
     position: sticky;
+    padding: 0px 16px;
     top: 0;
     width: 100%;
     z-index: 100;
+    background-color: var(--navbar-top-background-color);
   }
   ul {
+    flex-grow: 1;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #2f8f8f;
   }
   li {
     float: left;
@@ -37,14 +51,14 @@
   li a,
   .dropbtn {
     display: inline-block;
-    color: white;
+    color: var(--navbar-top-color);
     text-align: center;
     padding: 12px 18px;
     text-decoration: none;
   }
   li a:hover,
   .dropdown:hover .dropbtn {
-    background-color: #9f7fef;
+    background-color: var(--navbar-top-background-color-hover);
   }
   .dropdown {
     display: inline-block;
@@ -52,7 +66,7 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #bfbfef;
+    background-color: var(--navbar-top-dropdown-background-color);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   }
@@ -61,12 +75,12 @@
   }
   .dropdown-content a {
     display: block;
-    color: black;
+    color: var(--navbar-top-dropdown-color);
     text-align: left;
     padding: 12px 18px;
     text-decoration: none;
   }
   .dropdown-content a:hover {
-    background-color: #dfdfff;
+    background-color: var(--navbar-top-dropdown-background-color-hover);
   }
 </style>

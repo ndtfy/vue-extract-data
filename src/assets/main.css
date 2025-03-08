@@ -1,1 +1,23 @@
 @import './base.css';
+
+:root {
+  --navbar-top-color: #ffffff;
+  --navbar-top-background-color: #2f8f8f;
+  --navbar-top-background-color-hover: #9f7fef;
+  --navbar-top-dropdown-color: #000000;
+  --navbar-top-dropdown-background-color: #bfbfef;
+  --navbar-top-dropdown-background-color-hover: #dfdfff;
+
+  --navbar-bottom-background-color: #ecf3fe;
+}
+
+:root.dark-mode {
+  --navbar-top-color: #ffffff;
+  --navbar-top-background-color: #2f8f8f;
+  --navbar-top-background-color-hover: #9f7fef;
+  --navbar-top-dropdown-color: #000000;
+  --navbar-top-dropdown-background-color: #bfbfef;
+  --navbar-top-dropdown-background-color-hover: #dfdfff;
+
+  --navbar-bottom-background-color: #3c3c3c;
+}
