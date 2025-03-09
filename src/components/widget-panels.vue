@@ -18,31 +18,60 @@ const { width, height } = toRefs(props);
 </script>
 
 <template>
-  <div class="paneset" :style="`width: ${width}; height: ${height}`">
-    <div class="pane pane1">
-      <slot name="pane1" />
+  <div class="table" :style="`; width: ${width}; height: ${height}`">
+    <div class="table-cell">
+      <div class="bar">
+        <slot name="bar1" />
+      </div>
+      <div class="pane">
+        <slot name="pane1" />
+      </div>
     </div>
-    <div class="pane pane2">
-      <slot name="pane2" />
+    <div class="table-cell">
+      <div class="bar">
+        <slot name="bar2" />
+      </div>
+      <div class="pane">
+        <slot name="pane2" />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .paneset {
+  .table {
     display: table;
     /*width: v-bind('width');*/
     /*height: v-bind('height');*/
   }
-  .pane {
-    padding: 8px;
+  .table-cell {
+    position: relative;
     display: table-cell;
-    overflow: overlay;
+    vertical-align: top;
     border: 1px solid #77f;
-    min-width: 200px;
+    /*min-width: 200px;*/
+    overflow: overlay;
   }
-  .pane1 {
+  .table-cell:first-child {
     width: 50%;
     resize: both;
+  }
+  .bar {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #ddd;
+    gap: 4px;
+  }
+  .bar:has(*) {
+    border: 4px solid transparent;
+  }
+  .pane {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 8px;
   }
 </style>

@@ -12,14 +12,14 @@ const switchTheme = ref();
   <header>
     <ul>
       <li><a href=".">Home</a></li>
-      <li class="dropdown">
+      <!--li class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">Theme</a>
         <div class="dropdown-content">
           <a href="#" @click.prevent="switchTheme.toggleDarkMode(false)">Light</a>
           <a href="#" @click.prevent="switchTheme.toggleDarkMode(true)">Dark</a>
           <a href="#" @click.prevent="switchTheme.toggle()">Toggle</a>
         </div>
-      </li>
+      </li-->
     </ul>
     <WidgetSwitchTheme ref="switchTheme" />
   </header>
@@ -29,11 +29,10 @@ const switchTheme = ref();
   header {
     display: flex;
     justify-content: start;
-    align-content: center;
     align-items: center;
     position: sticky;
-    padding: 0px 16px;
     top: 0;
+    padding: 0px 16px;
     width: 100%;
     z-index: 100;
     background-color: var(--navbar-top-background-color);

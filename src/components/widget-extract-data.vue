@@ -5,6 +5,8 @@ import { ref, computed } from 'vue'
 import WidgetPanels from '@/components/widget-panels.vue'
 import WidgetOutput from '@/components/widget-output.vue'
 
+const env = ref(import.meta.env);
+
 const input = ref('');
 
 const output = computed(() => {
@@ -121,19 +123,15 @@ function copy() {
 <template>
   <WidgetPanels>
     <template #pane1>
-      <div class="panediv">
-        <textarea v-model="input" class="input-box" placeholder="Raw data" required></textarea>
-        <span></span>
-        <button class="clear-button" type="button" @click="clear"></button>
-      </div>
+      <textarea v-model="input" class="input-box" placeholder="Raw data" required></textarea>
+      <span></span>
+      <button class="clear-button" type="button" @click="clear"></button>
+    </template>
+    <template #bar2>
+      <button v-if="output.length" type="button" @click="copy">Copy</button>
     </template>
     <template #pane2>
-      <div class="panediv">
-        <WidgetOutput :output="output" :prompt="prompt" />
-        <div v-if="output.length">
-          <button type="button" @click="copy">Copy</button>
-        </div>
-      </div>
+      <WidgetOutput :output="output" :prompt="prompt" />
     </template>
   </WidgetPanels>
 
@@ -165,9 +163,10 @@ function copy() {
     <label for="input_regexp">Enter the regular expression</label>
   </div>
 
-  <hr />
-
-  <button type="button" @click="input=`    String1\t1\t2\t\t4\t
+  <div v-if="env.DEV" style="display: flex; flex-direction: column; padding: 16px; background-color: var(--debug-background-color)">
+    <b><i>*** Dev ***</i></b>
+    <div>
+      <button type="button" @click="input=`    String1\t1\t2\t\t4\t
     String2;1;\u00222\u0022;;\u00224\u0022;
     String3,1,\u00272\u0027,,\u00274\u0027,
     String4 1 2  4
@@ -176,19 +175,12 @@ function copy() {
     String7__eol__1__eol__2__eol____eol__4__eol__
     String8__br1__1__br2__2__br3____br4__4__br5__
 `">Insert test data</button>
-  <div>
+    </div>
     <b>Conversion options: {{ mode }}</b>
   </div>
-
 </template>
 
 <style scoped>
-  .panediv {
-    position: relative;
-    height: 95%;
-    display: flex;
-    flex-direction: column;
-  }
   textarea {
     flex-grow: 1;
     display: block;
@@ -196,10 +188,11 @@ function copy() {
     padding: 10px;
     width: 100%;
     min-height: 200px;
-    border: 0px;
     border: 1px solid #ccc;
     outline: 0;
-    border-radius: 15px;
+    border-radius: 10px;
+    color: var(--color-text);
+    background-color: var(--color-background);
   }
   textarea:focus {
     box-shadow: 0 0 15px 5px #b0e0ee;

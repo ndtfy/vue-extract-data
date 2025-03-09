@@ -17,16 +17,22 @@ const { output, prompt } = toRefs(props);
 </script>
 
 <template>
+  <i v-if="!output.length">{{ prompt }}</i>
   <div>
     <ol>
       <li v-for="val in output">{{ val }}</li>
     </ol>
-    <i v-if="!output.length">{{ prompt }}</i>
   </div>
 </template>
 
 <style scoped>
+  div {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 30vh;
+  }
   ol {
+    box-sizing: border-box;
     font-size: small;
     font-family: monospace;
     letter-spacing: normal;
@@ -34,14 +40,8 @@ const { output, prompt } = toRefs(props);
     line-height: normal;
     overflow-wrap: break-word;
     white-space: pre-wrap;
-
-    max-height: 40vh;
-    overflow-y: auto;
   }
   ol li::marker {
     color: blue;
-  }
-  i {
-    color: gray;
   }
 </style>
