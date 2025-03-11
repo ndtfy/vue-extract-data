@@ -28,8 +28,10 @@ const { output, prompt } = toRefs(props);
 <style scoped>
   div {
     flex-grow: 1;
+    resize: vertical;
     overflow-y: auto;
-    max-height: 30vh;
+    min-height: 200px;
+    max-height: 60vh;
   }
   ol {
     box-sizing: border-box;
@@ -39,7 +41,11 @@ const { output, prompt } = toRefs(props);
     word-spacing: normal;
     line-height: normal;
     overflow-wrap: break-word;
-    white-space: pre-wrap;
+    white-space-collapse: preserve;
+    text-wrap-mode: nowrap;
+  }
+  li {
+    max-width: 150px;
   }
   ol li::marker {
     color: blue;

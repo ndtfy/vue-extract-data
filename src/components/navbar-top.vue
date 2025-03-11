@@ -27,11 +27,11 @@ const switchTheme = ref();
 
 <style scoped>
   header {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: start;
     align-items: center;
-    position: sticky;
-    top: 0;
     padding: 0px 16px;
     width: 100%;
     z-index: 100;
@@ -52,7 +52,7 @@ const switchTheme = ref();
     display: inline-block;
     color: var(--navbar-top-color);
     text-align: center;
-    padding: 12px 18px;
+    padding: 12px 16px;
     text-decoration: none;
   }
   li a:hover,
@@ -76,7 +76,7 @@ const switchTheme = ref();
     display: block;
     color: var(--navbar-top-dropdown-color);
     text-align: left;
-    padding: 12px 18px;
+    padding: 12px 16px;
     text-decoration: none;
   }
   .dropdown-content a:hover {

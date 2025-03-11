@@ -50,7 +50,6 @@ const { checked, onChange } = toRefs(props);
     background: #fff;
     border-radius: 50%;
     transform: scale(0.8);
-    position: absolute;
     left: 0;
     top: 0;
     transition: left 0.09s ease-in-out;

@@ -118,17 +118,26 @@ function copy() {
   navigator.clipboard.writeText( output.value.join('\n') );
 }
 
+const nowrap = ref(true);
+
+function toggleWrap() {
+  nowrap.value = !nowrap.value;
+}
+
 </script>
 
 <template>
   <WidgetPanels>
+    <template #bar1>
+      <button type="button" @click="toggleWrap">{{ `Mode: ${nowrap ? 'nowrap' : 'wrap'}` }}</button>
+    </template>
     <template #pane1>
-      <textarea v-model="input" class="input-box" placeholder="Raw data" required></textarea>
+      <textarea v-model="input" class="input-box" :class="{'whitespace-nowrap': nowrap}" placeholder="Raw data" required></textarea>
       <span></span>
       <button class="clear-button" type="button" @click="clear"></button>
     </template>
     <template #bar2>
-      <button v-if="output.length" type="button" @click="copy">Copy</button>
+      <button type="button" @click="copy" :disabled="!output.length">Copy</button>
     </template>
     <template #pane2>
       <WidgetOutput :output="output" :prompt="prompt" />
@@ -148,17 +157,17 @@ function copy() {
     </template>
   </ul>
 
-  <div v-if="mode.includes('symbols')" class="pt-5">
+  <div v-if="mode.includes('symbols')" class="pt-3">
     <input type="search" id="input_symbols" v-model="symbols" />
     <label for="input_symbols">List all separating characters (spaces are ignored)</label>
   </div>
 
-  <div v-if="mode.includes('subsequence')" class="pt-5">
+  <div v-if="mode.includes('subsequence')" class="pt-3">
     <input type="search" id="input_subsequence" v-model="subsequence" />
     <label for="input_subsequence">Enter the sequence</label>
   </div>
 
-  <div v-if="mode.includes('regexp')" class="pt-5">
+  <div v-if="mode.includes('regexp')" class="pt-3">
     <input type="search" id="input_regexp" v-model="regexp" />
     <label for="input_regexp">Enter the regular expression</label>
   </div>
@@ -187,7 +196,6 @@ function copy() {
     resize: none;
     padding: 10px;
     width: 100%;
-    min-height: 200px;
     border: 1px solid #ccc;
     outline: 0;
     border-radius: 10px;
@@ -204,10 +212,7 @@ function copy() {
     list-style-type: none;
   }
   label {
-    padding: 0px 20px;
-  }
-  .pt-5 {
-    padding: 20px 0px 0px 0px;
+    padding: 0px 12px;
   }
 
   textarea1 + span::before {

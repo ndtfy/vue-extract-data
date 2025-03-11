@@ -1,5 +1,7 @@
 @import './base.css';
 
+@import './tw-dummy.css';
+
 :root {
   --navbar-top-color: #ffffff;
   --navbar-top-background-color: #2f8f8f;

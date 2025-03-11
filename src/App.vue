@@ -27,11 +27,11 @@ import WidgetExtractData from '@/components/widget-extract-data.vue'
   }
   main {
     flex-grow: 1;
-    padding: 10px;
+    padding: 8px;
     background-color: var(--color-background-mute);
   }
   .widget {
-    padding: 10px;
+    padding: 8px;
     background-color: var(--color-background);
   }
 </style>
