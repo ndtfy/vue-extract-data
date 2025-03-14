@@ -124,6 +124,20 @@ function toggleWrap() {
   nowrap.value = !nowrap.value;
 }
 
+if ( import.meta.env.DEV ) {
+  function insertTestData() {
+    input.value = `    String1\t1\t2\t\t4\t
+    String2;1;\u00222\u0022;;\u00224\u0022;
+    String3,1,\u00272\u0027,,\u00274\u0027,
+    String4 1 2  4
+    String5\u16801\u200a2\u2028\u205f4\ufeff
+    String6-1-2--4-
+    String7__eol__1__eol__2__eol____eol__4__eol__
+    String8__br1__1__br2__2__br3____br4__4__br5__
+`
+  }
+}
+
 </script>
 
 <template>
@@ -172,18 +186,10 @@ function toggleWrap() {
     <label for="input_regexp">Enter the regular expression</label>
   </div>
 
-  <div v-if="env.DEV" style="display: flex; flex-direction: column; padding: 16px; background-color: var(--debug-background-color)">
+  <div v-if="env.DEV" style="padding: 16px; background-color: var(--debug-background-color)">
     <b><i>*** Dev ***</i></b>
     <div>
-      <button type="button" @click="input=`    String1\t1\t2\t\t4\t
-    String2;1;\u00222\u0022;;\u00224\u0022;
-    String3,1,\u00272\u0027,,\u00274\u0027,
-    String4 1 2  4
-    String5\u16801\u200a2\u2028\u205f4\ufeff
-    String6-1-2--4-
-    String7__eol__1__eol__2__eol____eol__4__eol__
-    String8__br1__1__br2__2__br3____br4__4__br5__
-`">Insert test data</button>
+      <button type="button" @click="insertTestData">Insert test data</button>
     </div>
     <b>Conversion options: {{ mode }}</b>
   </div>
