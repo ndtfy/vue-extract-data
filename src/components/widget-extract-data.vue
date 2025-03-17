@@ -80,7 +80,7 @@ const output = computed(() => {
     resList = resList.sort();
 
   return resList;
-})
+});
 
 const prompt = ref('');
 
@@ -124,8 +124,8 @@ function toggleWrap() {
   nowrap.value = !nowrap.value;
 }
 
-if ( import.meta.env.DEV ) {
-  function insertTestData() {
+function insertTestData() {
+  if ( import.meta.env.DEV ) {
     input.value = `    String1\t1\t2\t\t4\t
     String2;1;\u00222\u0022;;\u00224\u0022;
     String3,1,\u00272\u0027,,\u00274\u0027,
@@ -158,36 +158,38 @@ if ( import.meta.env.DEV ) {
     </template>
   </WidgetPanels>
 
-  <b>Conversion options:</b>
-  <ul>
-    <template v-for="item in modeList">
-    <li v-if="item[1]">
-      <input type="checkbox" :id="item[0]" :value="item[0]" v-model="mode" />
-      <label :for="item[0]">{{ item[1] }}</label>
-    </li>
-    <p v-else>
-      <br />
-    </p>
-    </template>
-  </ul>
+  <div class="whitespace-nowrap">
+    <b>Conversion options:</b>
+    <ul>
+      <template v-for="item in modeList">
+      <li v-if="item[1]">
+        <input type="checkbox" :id="item[0]" :value="item[0]" v-model="mode" />
+        <label :for="item[0]">{{ item[1] }}</label>
+      </li>
+      <p v-else>
+        <br />
+      </p>
+      </template>
+    </ul>
 
-  <div v-if="mode.includes('symbols')" class="pt-3">
-    <input type="search" id="input_symbols" v-model="symbols" />
-    <label for="input_symbols">List all separating characters (spaces are ignored)</label>
+    <div v-if="mode.includes('symbols')" class="pt-3">
+      <input type="search" id="input_symbols" v-model="symbols" />
+      <label for="input_symbols">List all separating characters (spaces are ignored)</label>
+    </div>
+
+    <div v-if="mode.includes('subsequence')" class="pt-3">
+      <input type="search" id="input_subsequence" v-model="subsequence" />
+      <label for="input_subsequence">Enter the sequence</label>
+    </div>
+
+    <div v-if="mode.includes('regexp')" class="pt-3">
+      <input type="search" id="input_regexp" v-model="regexp" />
+      <label for="input_regexp">Enter the regular expression</label>
+    </div>
   </div>
 
-  <div v-if="mode.includes('subsequence')" class="pt-3">
-    <input type="search" id="input_subsequence" v-model="subsequence" />
-    <label for="input_subsequence">Enter the sequence</label>
-  </div>
-
-  <div v-if="mode.includes('regexp')" class="pt-3">
-    <input type="search" id="input_regexp" v-model="regexp" />
-    <label for="input_regexp">Enter the regular expression</label>
-  </div>
-
-  <div v-if="env.DEV" style="padding: 16px; background-color: var(--debug-background-color)">
-    <b><i>*** Dev ***</i></b>
+  <div v-if="env.DEV" class="whitespace-nowrap" style="padding: 16px; background-color: var(--debug-background-color)">
+    <b><i @click="console.log(env)">*** Dev ***</i></b>
     <div>
       <button type="button" @click="insertTestData">Insert test data</button>
     </div>

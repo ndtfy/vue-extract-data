@@ -33,7 +33,6 @@ const switchTheme = ref();
     justify-content: start;
     align-items: center;
     padding: 0px 16px;
-    width: 100%;
     z-index: 100;
     background-color: var(--navbar-top-background-color);
   }

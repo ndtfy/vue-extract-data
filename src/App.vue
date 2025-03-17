@@ -11,7 +11,7 @@ import WidgetExtractData from '@/components/widget-extract-data.vue'
     <NavbarTop />
     <main>
       <div class="widget">
-        <h3>Convert raw data to list</h3>
+        <h3 class="whitespace-nowrap">Convert raw data to list</h3>
         <WidgetExtractData />
       </div>
     </main>
@@ -23,6 +23,7 @@ import WidgetExtractData from '@/components/widget-extract-data.vue'
   .global {
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
     height: 100vh;
   }
   main {
