@@ -1,6 +1,6 @@
 {
   "name": "vue-extract-data",
-  "version": "0.1",
+  "version": "0.1.1",
   "license": "MIT",
   "homepage": "https://github.com/ndtfy/vue-extract-data",
   "author": {
@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build_root": "vite build --config vite.config.root.js",
     "preview": "vite preview"
   },
   "dependencies": {
