@@ -68,8 +68,11 @@ const { width, height } = toRefs(props);
     justify-content: start;
     align-items: center;
     top: 0;
-    background-color: #ddd;
     gap: 4px;
+    background-color: #ddd;
+  }
+  .dark .bar {
+    background-color: #555;
   }
   .bar:has(*) {
     border: 4px solid transparent;

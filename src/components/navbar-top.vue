@@ -25,6 +25,25 @@ const switchTheme = ref();
   </header>
 </template>
 
+<style>
+  :root {
+    --navbar-top-color: #ffffff;
+    --navbar-top-background-color: #2f8f8f;
+    --navbar-top-background-color-hover: #9f7fef;
+    --navbar-top-dropdown-color: #000000;
+    --navbar-top-dropdown-background-color: #bfbfef;
+    --navbar-top-dropdown-background-color-hover: #dfdfff;
+  }
+  :root.dark {
+    --navbar-top-color: #ffffff;
+    --navbar-top-background-color: #2f8f8f;
+    --navbar-top-background-color-hover: #9f7fef;
+    --navbar-top-dropdown-color: #000000;
+    --navbar-top-dropdown-background-color: #bfbfef;
+    --navbar-top-dropdown-background-color-hover: #dfdfff;
+  }
+</style>
+
 <style scoped>
   header {
     position: sticky;
@@ -49,10 +68,10 @@ const switchTheme = ref();
   li a,
   .dropbtn {
     display: inline-block;
-    color: var(--navbar-top-color);
     text-align: center;
     padding: 12px 16px;
     text-decoration: none;
+    color: var(--navbar-top-color);
   }
   li a:hover,
   .dropdown:hover .dropbtn {
@@ -64,19 +83,19 @@ const switchTheme = ref();
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--navbar-top-dropdown-background-color);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    background-color: var(--navbar-top-dropdown-background-color);
   }
   .dropdown:hover .dropdown-content {
     display: block;
   }
   .dropdown-content a {
     display: block;
-    color: var(--navbar-top-dropdown-color);
     text-align: left;
     padding: 12px 16px;
     text-decoration: none;
+    color: var(--navbar-top-dropdown-color);
   }
   .dropdown-content a:hover {
     background-color: var(--navbar-top-dropdown-background-color-hover);

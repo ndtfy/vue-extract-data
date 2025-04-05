@@ -13,6 +13,15 @@ const status = ref('\u200a'); // &hairsp;
   </footer>
 </template>
 
+<style>
+  :root {
+    --navbar-bottom-background-color: #ecf3fe;
+  }
+  :root.dark {
+    --navbar-bottom-background-color: #3c3c3c;
+  }
+</style>
+
 <style scoped>
   footer {
     position: sticky;
