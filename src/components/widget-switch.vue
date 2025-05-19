@@ -23,6 +23,17 @@ const { checked, onChange } = toRefs(props);
   <input type="checkbox" :checked @change="onChange" />
 </template>
 
+<style>
+  :root {
+    --widget-switch-bg-color: #d8d8d8;
+    --widget-switch-checked-bg-color: #70a0f0;
+  }
+  :root.dark {
+    --widget-switch-bg-color: #585858;
+    --widget-switch-checked-bg-color: #07398d;
+  }
+</style>
+
 <style scoped>
   input {
     position: relative;
@@ -34,10 +45,10 @@ const { checked, onChange } = toRefs(props);
     border-radius: 30px;
     transition: background 0.09s ease-in-out;
     outline: none;
-    background-color: #ddd;
+    background-color: var(--widget-switch-bg-color);
   }
   input:checked {
-    background-color: #3af;
+    background-color: var(--widget-switch-checked-bg-color);
   }
   input::after {
     position: absolute;

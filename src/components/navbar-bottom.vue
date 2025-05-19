@@ -2,23 +2,27 @@
 
 import { ref } from 'vue'
 
-const status = ref('\u200a'); // &hairsp;
+const status = ref('');
+
+function onClick1() { console.log(import.meta.env); }
 
 </script>
 
 <template>
   <footer>
+    <i @click="onClick1">&ensp;</i>
     <i class="truncate mr-auto">{{ status }}</i>
     <div></div>
+    <i>&ensp;</i>
   </footer>
 </template>
 
 <style>
   :root {
-    --navbar-bottom-background-color: #ecf3fe;
+    --navbar-bottom-bg-color: #ecf3fe;
   }
   :root.dark {
-    --navbar-bottom-background-color: #3c3c3c;
+    --navbar-bottom-bg-color: #3c3c3c;
   }
 </style>
 
@@ -29,8 +33,8 @@ const status = ref('\u200a'); // &hairsp;
     display: flex;
     justify-content: start;
     align-items: center;
-    padding: 4px 16px;
+    padding: 4px 4px;
     z-index: 100;
-    background-color: var(--navbar-bottom-background-color);
+    background-color: var(--navbar-bottom-bg-color);
   }
 </style>
